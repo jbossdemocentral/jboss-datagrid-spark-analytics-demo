@@ -1,5 +1,6 @@
 .idea
-installs/*
+installs/*.zip
+installs/*.tgz
 target
 *.iml
 .DS_Store
