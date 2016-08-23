@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jboss.datagrid.demo</groupId>
+		<artifactId>stackexchange</artifactId>
+        <version>1.0.0</version>
+	</parent>
+	<artifactId>stackexchange-importer</artifactId>
+    <dependencies>
+        <dependency>
+           <groupId>org.jboss.datagrid.demo</groupId>
+           <artifactId>${project.parent.artifactId}-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-remote</artifactId>
+            <version>8.3.0.Final-redhat-1</version>
+        </dependency>
+    </dependencies>
+    <profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>org.jboss.datagrid.demo.stackexchange.Main</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>${project.artifactId}-full</finalName>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                              <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                              <phase>package</phase> <!-- bind to the packaging phase -->
+                              <goals>
+                                <goal>single</goal>
+                              </goals>
+                            </execution>
+                      </executions>
+                    </plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

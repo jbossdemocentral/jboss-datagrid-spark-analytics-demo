@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.jboss.datagrid.demo</groupId>
+	<artifactId>stackexchange</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
+	<name>stackexchange</name>
+	<description>This is a demo application for JBoss Data Grid</description>
+	<url>http://blog.thomasqvarnstrom.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+	</properties>
+
+    <modules>
+        <module>model</module>
+        <module>importer</module>
+		<module>spark-analytics</module>
+	</modules>
+
+	<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${pom.groupId}</groupId>
+                <artifactId>stackexchange-model</artifactId>
+                <version>${pom.version}</version>
+            </dependency>
+        </dependencies>
+	</dependencyManagement>
+
+
+	<repositories>
+		<repository>
+			<id>techpreview-all-repository</id>
+			<name>Red Hat Enterprise Maven Repository</name>
+			<url>http://maven.repository.redhat.com/ga/all/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.4.3</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>3.5.1</version>
+						<configuration>
+							<source>${maven.compiler.source}</source>
+							<target>${maven.compiler.target}</target>
+						</configuration>
+					</plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>org.jboss.datagrid.demo.stackexchange.Main</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+</project>

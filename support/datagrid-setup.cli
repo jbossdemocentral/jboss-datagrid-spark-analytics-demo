@@ -1,0 +1,18 @@
+embed-host-controller
+
+# Change the port offset set for server-two to 100 since it makes it easier.
+/host=master/server-config=server-two:write-attribute(name=socket-binding-port-offset,value=100)
+
+# Make server-one autostart
+/host=master/server-config=server-one:write-attribute(name=auto-start,value=true)
+
+# Add a third server
+/host=master/server-config=server-three:add(group=cluster, socket-binding-port-offset=200)
+/host=master/server-config=server-three:write-attribute(name=auto-start,value=true)
+
+# Create the Post and User store
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=PostStore:add(configuration=persistent-file-store-write-behind)
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=UserStore:add(configuration=persistent-file-store-write-behind)
+
+# Create analytics store
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=AnalyticsStore:add(configuration=persistent-file-store-write-behind)
