@@ -26,9 +26,9 @@
 	<dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>${pom.groupId}</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>stackexchange-model</artifactId>
-                <version>${pom.version}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
 	</dependencyManagement>

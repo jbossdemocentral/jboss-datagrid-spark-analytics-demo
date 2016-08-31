@@ -8,9 +8,8 @@ SRC_DIR=$basedir/installs
 
 SPARK_INSTALL=spark-1.6.2-bin-hadoop2.6.tgz
 JDG_INSTALL=jboss-datagrid-7.0.0-server.zip
-ZEPPELIN_INSTALL=zeppelin-0.6.0-bin-all.tgz
 
-SOFTWARE=($SPARK_INSTALL $JDG_INSTALL $ZEPPELIN_INSTALL)
+SOFTWARE=($SPARK_INSTALL $JDG_INSTALL)
 
 
 # wipe screen.
@@ -170,34 +169,6 @@ echo "  - importing historical Posts, this may take a while"
 echo
 java -jar projects/stackexchange/importer/target/stackexchange-importer-full.jar $(pwd)/projects/stackexchange/Users.xml > /dev/null
 
-# echo "  - Submitting analytics job to spark master"
-# echo
-# $SPARK_HOME/bin/spark-submit --master spark://127.0.0.1:7077 --class org.jboss.datagrid.demo.stackexchange.InifinispanRDD projects/stackexchange/spark-analytics/target/stackexchange-spark-analytics-full.jar
-
-
-echo "  - Installing Zeppelin"
+echo "  - Submitting analytics job to spark master"
 echo
-tar -zxf $SRC_DIR/$ZEPPELIN_INSTALL -C target > /dev/null
-
-ZEPPELIN_HOME=$(cd target/zeppelin-* && pwd)
-
-# echo "  - Configure Zeppelin to use port 8088 and spark://localhost:7077"
-# echo
-# cp -f support/zeppelin-env.sh $ZEPPELIN_HOME/bin/
-
-echo "  - Configure interpreter for Spark using JDG"
-echo
-cp -f support/interpreter.json $ZEPPELIN_HOME/conf/
-
-# echo "  - Add notebook for stackexchange analytics"
-# echo
-# cp -rf support/notebook-datagrid $ZEPPELIN_HOME/notebook/
-
-echo "  - Start Zeppelin"
-echo
-pushd $ZEPPELIN_HOME > /dev/null
-bin/zeppelin-daemon.sh start > /dev/null
-popd > /dev/null
-
-
-# curl -X POST -H "Content-Type: application/json" --data @support/demo-notebook.json http://localhost:8080/api/notebook
+$SPARK_HOME/bin/spark-submit --master spark://127.0.0.1:7077 --class org.jboss.datagrid.demo.stackexchange.RunAnalytics projects/stackexchange/spark-analytics/target/stackexchange-spark-analytics-full.jar
