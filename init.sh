@@ -8,8 +8,9 @@ SRC_DIR=$basedir/installs
 
 SPARK_INSTALL=spark-1.6.2-bin-hadoop2.6.tgz
 JDG_INSTALL=jboss-datagrid-7.0.0-server.zip
+EAP_INSTALL=jboss-eap-7.0.0.zip
 
-SOFTWARE=($SPARK_INSTALL $JDG_INSTALL)
+SOFTWARE=($SPARK_INSTALL $JDG_INSTALL $EAP_INSTALL)
 
 
 # wipe screen.
@@ -140,6 +141,24 @@ do
 done
 echo
 echo
+
+echo "  - installing JBoss EAP"
+echo
+unzip -q -d target $SRC_DIR/$EAP_INSTALL
+
+EAP_HOME=$(cd target/jboss-eap-7* && pwd)
+
+echo "  - configuring JBoss EAP"
+echo
+$EAP_HOME/bin/add-user.sh -s -u admin -p admin-123
+cp projects/jdg-visualizer/target/jdg-visualizer.war $EAP_HOME/standalone/deployments
+
+echo "  - starting EAP"
+echo
+
+pushd target/jboss-eap-7*/bin > /dev/null
+./standalone.sh -Djboss.socket.binding.port-offset=300 -b 0.0.0.0 -bmanagement=0.0.0.0 -Djdg.visualizer.jmxUser=admin -Djdg.visualizer.jmxPass=admin-123 -Djdg.visualizer.serverList=localhost:11222 > /dev/null &
+popd > /dev/null
 
 echo "  - starting Spark master on localhost"
 echo
