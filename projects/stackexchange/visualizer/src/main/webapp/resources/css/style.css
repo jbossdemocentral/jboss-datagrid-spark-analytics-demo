@@ -1,0 +1,46 @@
+
+.stockTitle {
+	font: 12px;
+}
+
+.axis path, .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+	font: 8px sans-serif;
+}
+
+.line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+	font: 8px sans-serif;
+}
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.parent { 
+  max-width: 2000px; 
+  width: 100%; 
+  margin: 0 auto;
+  padding: 0px;
+}
+.row { 
+  width: 100%;
+}
+.col { 
+  display: inline-block;
+  vertical-align: top;
+  padding: 0px;
+  margin: 0px;
+  letter-spacing: normal;
+}
+
+svg > g > g.arc > text {
+    font-size: "14px";
+    fill: rgb(255, 187, 120);
+
+}

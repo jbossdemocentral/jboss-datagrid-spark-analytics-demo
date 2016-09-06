@@ -26,6 +26,7 @@ package com.redhat.middleware.jdg.visualizer.internal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.exceptions.RemoteCacheManagerNotStartedException;
 
@@ -68,7 +69,7 @@ public class PingThread extends Thread {
 		running = true;
 		while (running) {
 			try {
-				cacheManager.getCache().stats();
+                cacheManager.getCache().stats();
 			} catch (IllegalStateException e) {
 				logger.log(Level.SEVERE, "illegal state exception, aborting", e);
 				abort();

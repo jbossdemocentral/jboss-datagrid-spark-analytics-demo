@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want
             to import. -->
-        <jboss.bom.version>6.2.0.GA</jboss.bom.version>
+        <jboss.bom.version>7.0.1.GA</jboss.bom.version>
         <!-- Alternatively, comment out the above line, and un-comment the
             line below to use version 1.0.0.M12-redhat-1 which is a release certified
             to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6
@@ -51,10 +51,14 @@
         <!-- <jboss.bom.version>1.0.0.M12-redhat-1</jboss.bom.version>> -->
 
         <!-- This is the JDG version, please make sure JDG repository is setup (see README.md) -->
-        <infinispan.version>6.1.0.Final-redhat-4</infinispan.version>
+        <infinispan.version>8.3.0.Final-redhat-1</infinispan.version>
         <!-- For community version, remove -redhat-1
         	<infinispan.version>5.1.5.FINAL</infinispan.version>
         -->
+        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+
+        <jboss-eap-management-hostname>localhost</jboss-eap-management-hostname>
+        <jboss-eap-management-port>9990</jboss-eap-management-port>
     </properties>
 
 
@@ -69,15 +73,8 @@
                 stack you can read this as the JBoss stack of the Java EE 6 APIs, with extras
                 from the Hibernate family of projects) -->
             <dependency>
-                <groupId>org.jboss.bom.eap</groupId>
-                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
-                <version>${jboss.bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.bom.eap</groupId>
-                <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-eap-javaee7-with-tools</artifactId>
                 <version>${jboss.bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -88,29 +85,37 @@
     <dependencies>
 
         <!-- First declare the APIs we depend on and need for compilation.
-            All of them are provided by JBoss AS 7 -->
+            All of them are provided by JBoss EAP 7 -->
 
         <!-- Import the CDI API, we use provided scope as the API is included
-            in JBoss AS 7 -->
+            in JBoss EAP 7 -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Import the Common Annotations API (JSR-250), we use provided
-            scope as the API is included in JBoss AS 7 -->
+        <!-- Import the Common Annotations API, we use provided
+            scope as the API is included in JBoss EAP 7 -->
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <artifactId>jboss-annotations-api_1.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- Import the JAX-RS API, we use provided scope as the API is included
-            in JBoss AS 7 -->
+            in JBoss EAP 7 -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the Java Servlet API, we use provided scope as the API is included
+            in JBoss EAP 7-->
+        <dependency>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -123,31 +128,18 @@
 
         <dependency>
         	<groupId>org.infinispan</groupId>
-        	<artifactId>infinispan-client-hotrod</artifactId>
+        	<artifactId>infinispan-remote</artifactId>
         	<version>${infinispan.version}</version>
         </dependency>
-        <dependency>
-        	<groupId>org.infinispan</groupId>
-        	<artifactId>infinispan-core</artifactId>
-        	<version>${infinispan.version}</version>
-        </dependency>
-
         <!-- These dependecies are needed to connect to JBoss JMX -->
         <dependency>
-        	<groupId>org.jboss.remoting3</groupId>
-        	<artifactId>remoting-jmx</artifactId>
-        	<version>1.0.1.Final</version>
+            <groupId>org.jboss.eap</groupId>
+            <artifactId>wildfly-client-all</artifactId>
+            <version>7.0.0.GA-redhat-2</version>
+            <scope>provided</scope>
         </dependency>
-        <dependency>
-        	<groupId>org.jboss.xnio</groupId>
-        	<artifactId>xnio-nio</artifactId>
-        	<version>3.0.0.GA</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.jboss.spec.javax.servlet</groupId>
-        	<artifactId>jboss-servlet-api_3.0_spec</artifactId>
-        	<scope>provided</scope>
-        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -161,8 +153,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -178,9 +170,9 @@
                 container -->
             <!-- To use, run: mvn package jboss-as:deploy -->
             <plugin>
-                <groupId>org.jboss.as.plugins</groupId>
-                <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.1.1.Final</version>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
             </plugin>
         </plugins>
     </build>
@@ -219,6 +211,14 @@
                         <version>2.4.3</version>
                         <configuration>
                             <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <configuration>
+                            <hostname>${jboss-eap-management-hostname}</hostname>
+                            <port>${jboss-eap-management-port}</port>
                         </configuration>
                     </plugin>
                 </plugins>

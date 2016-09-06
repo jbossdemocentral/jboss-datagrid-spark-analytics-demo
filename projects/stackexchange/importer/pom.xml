@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-remote</artifactId>
-            <version>8.3.0.Final-redhat-1</version>
+            <version>${infinispan-remote.version}</version>
         </dependency>
     </dependencies>
     <profiles>

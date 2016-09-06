@@ -55,7 +55,7 @@ public abstract class JmxPollerManager<I, T, P extends JmxPoller<T>> extends Rem
 		
 		JMXServiceURL serviceURL = generateServiceURL(address);
 
-		Map<String, Object> env = new HashMap<String, Object>();
+		Map<String, Object> env = new HashMap<>();
 		if (jmxUsername != null && jmxPassword != null) {
 			env.put(JMXConnector.CREDENTIALS, new String[] { jmxUsername, jmxPassword });
 		}

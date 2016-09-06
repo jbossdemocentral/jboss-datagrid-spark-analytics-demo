@@ -1,0 +1,13 @@
+embed-server --server-config=clustered.xml
+
+# Create the Post and User store
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=PostStore:add(configuration=persistent-file-store-write-behind)
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=UserStore:add(configuration=persistent-file-store-write-behind)
+
+# Create analytics store
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=KeyWordAnalyticsStore:add(configuration=transactional)
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=LocationAnalyticsStore:add(configuration=transactional)
+/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=HighestRankedAnalyticsStore:add(configuration=transactional)
+
+# Allow remoting connections to public interface
+#/subsystem=jmx/remoting-connector=jmx:write-attribute(name=use-management-endpoint,value=false)

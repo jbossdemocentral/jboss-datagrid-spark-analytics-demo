@@ -29,6 +29,7 @@ import java.util.Properties;
 import javax.enterprise.inject.Alternative;
 
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 import org.infinispan.client.hotrod.impl.ConfigurationProperties;
 
 import com.redhat.middleware.jdg.visualizer.poller.jdg.JdgJmxCacheNamesPollerManager;
@@ -47,7 +48,7 @@ public class VisualizerRemoteCacheManager extends RemoteCacheManager {
 	private PingThread pingThread;
 
 	public VisualizerRemoteCacheManager() {
-		super(getCacheProperties());
+		super(new ConfigurationBuilder().withProperties(getCacheProperties()).build());
 	}
 	
 	public ServersRegistry getRegistry() {

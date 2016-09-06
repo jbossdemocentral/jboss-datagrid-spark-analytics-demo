@@ -92,6 +92,7 @@ public abstract class JmxPoller<T> implements Poller<T> {
 		connector = JMXConnectorFactory.connect(jmxUrl, jmxEnv);
 		connection = connector.getMBeanServerConnection();
 		connected = true;
+		System.out.println("CONNECTED");
 	}
 	
 	protected void disconnect() {

@@ -15,12 +15,16 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
+        <infinispan-remote.version>8.3.0.Final-redhat-1</infinispan-remote.version>
+        <jboss-eap-management-hostname>localhost</jboss-eap-management-hostname>
+		<jboss-eap-management-port>9990</jboss-eap-management-port>
 	</properties>
 
     <modules>
         <module>model</module>
         <module>importer</module>
 		<module>spark-analytics</module>
+		<module>visualizer</module>
 	</modules>
 
 	<dependencyManagement>
@@ -50,6 +54,18 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jboss-enterprise-maven-repository</id>
+			<url>https://maven.repository.redhat.com/ga/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 	<profiles>
 		<profile>
 			<id>default</id>

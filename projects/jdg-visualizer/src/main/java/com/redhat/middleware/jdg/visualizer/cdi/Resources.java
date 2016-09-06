@@ -57,8 +57,8 @@ import com.redhat.middleware.jdg.visualizer.rest.CacheNameInfo;
 public class Resources {
    private String refreshRate = System.getProperty("jdg.visualizer.refreshRate", "2000");
 	private String jmxUsername = System.getProperty("jdg.visualizer.jmxUser", "admin");
-	private String jmxPassword = System.getProperty("jdg.visualizer.jmxPass", "jboss");
-	private int jmxHotrodPortOffset = Integer.parseInt(System.getProperty("jdg.visualizer.jmxPortOffset", "1223"));
+	private String jmxPassword = System.getProperty("jdg.visualizer.jmxPass", "admin-123");
+	private int jmxHotrodPortOffset = Integer.parseInt(System.getProperty("jdg.visualizer.jmxPortOffset", "1232"));
 	private String nodeColorAsString = System.getProperty("jdg.visualizer.nodeColor");
 	
 	@Produces
@@ -84,12 +84,12 @@ public class Resources {
 		manager.setJmxPassword(jmxPassword);
 		manager.setJmxHotrodPortOffset(jmxHotrodPortOffset);
 		manager.setRefreshRate(Long.valueOf(refreshRate));
-		
-		if(nodeColorAsString != null) 
+
+		if(nodeColorAsString != null)
 			manager.setMultiColor(false, Integer.parseInt(nodeColorAsString));
-		else 
+		else
 			manager.setMultiColor(true, null);
-		
+
 		return manager;
 	}
 

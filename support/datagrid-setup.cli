@@ -15,4 +15,9 @@ embed-host-controller
 /profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=UserStore:add(configuration=persistent-file-store-write-behind)
 
 # Create analytics store
-/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=AnalyticsStore:add(configuration=persistent-file-store-write-behind)
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=KeyWordAnalyticsStore:add(configuration=transactional)
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=LocationAnalyticsStore:add(configuration=transactional)
+/profile=clustered/subsystem=datagrid-infinispan/cache-container=clustered/distributed-cache=HighestRankedAnalyticsStore:add(configuration=transactional)
+
+# Allow remoting connections to public interface
+/profile=clustered/subsystem=jmx/remoting-connector=jmx:add(use-management-endpoint=false)

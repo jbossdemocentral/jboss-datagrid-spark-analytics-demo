@@ -78,8 +78,12 @@ jps -lm | grep org.apache.spark.deploy.master.Master | grep -v grep | awk '{prin
 
 #If JDG is running stop it
 echo "  - stopping any running datagrid instances"
+echo
 jps -lm | grep jboss-datagrid | grep -v grep | awk '{print $1}' | xargs kill  > /dev/null
 
+echo "  - stopping any running jboss eap instances"
+echo
+jps -lm | grep jboss-eap | grep -v grep | awk '{print $1}' | xargs kill  > /dev/null
 
 sleep 2
 echo
