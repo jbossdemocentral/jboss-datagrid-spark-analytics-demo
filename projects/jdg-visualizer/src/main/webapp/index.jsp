@@ -29,7 +29,8 @@ Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
 <meta http-equiv="Content-Type"
 	content="text/html; charset=windows-1252">
 <link rel="stylesheet" type="text/css" href="viz.css" media="screen" />
-<script src="jquery-1.5.1.min.js" type="text/Javascript"></script>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
 <script src="viz-dot.js" type="text/Javascript"></script>
 <script src="viz-isnode.js" type="text/Javascript"></script>
 <script src="viz.js" type="text/Javascript"></script>
