@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 import javax.ws.rs.core.MediaType;
 import javax.xml.stream.Location;
 
+import static java.util.Comparator.*;
+
 /**
  * Created by tqvarnst on 01/09/16.
  */
@@ -44,9 +46,14 @@ public class AnalyticsResultService {
     public Map<String,Integer> getKeywordCount() {
         RemoteCache<String, Integer> cache = cm.getCache(keywordAnalyticsStore);
 
-        return cache.getAll(cache.keySet()).entrySet()
+        Set<String> keys = cache.keySet();
+        if(keys==null || keys.size()==0) {
+            return new HashMap<>();
+        }
+
+        return cache.getAll(keys).entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .sorted(Map.Entry.comparingByValue(reverseOrder()))
                 .limit(MAX_SIZE_KEYWORD_RANKING)
                 .collect(Collectors.toMap(
                     Map.Entry::getKey,
@@ -62,9 +69,14 @@ public class AnalyticsResultService {
     public Map<String,Integer> getUserRankingCount() {
         RemoteCache<String, Integer> cache = cm.getCache(usersWithHighestReputationStore);
 
-        return cache.getAll(cache.keySet()).entrySet()
+        Set<String> keys = cache.keySet();
+        if(keys==null || keys.size()==0) {
+            return new HashMap<>();
+        }
+
+        return cache.getAll(keys).entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .sorted(Map.Entry.comparingByValue(reverseOrder()))
                 .limit(MAX_SIZE_USER_RANKING)
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
@@ -79,19 +91,16 @@ public class AnalyticsResultService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<LocationCount> getLocations() {
         RemoteCache<String, Long> cache = cm.getCache(locationAnalyticsStore);
-        System.out.println("Size of cache is " + cache.size());
 
-        cache.keySet().forEach(System.out::println);
+        Set<String> keys = cache.keySet();
+        if(keys==null || keys.size()==0) {
+            return new ArrayList<>();
+        }
 
-        return cache.getAll(cache.keySet()).entrySet()
+        return cache.getAll(keys).entrySet()
                 .stream()
                 .map(m -> new LocationCount(m.getKey(),m.getValue()))
-//                .map(new Function<Map.Entry<String,Long>, LocationCount>() {
-//                    @Override
-//                    public LocationCount apply(Map.Entry<String, Long> m) {
-//                        return new LocationCount(m.getKey(),m.getValue());
-//                    }
-//                })
+                .sorted(comparing(LocationCount::getNumOfPosts).reversed())
                 .limit(MAX_SIZE_LOCATIONS)
                 .collect(Collectors.toList());
 

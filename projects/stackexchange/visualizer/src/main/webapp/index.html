@@ -30,6 +30,7 @@
     <link href="resources/css/style.css" rel="stylesheet"/>
     <script src="//d3js.org/d3.v3.min.js"></script>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+
     <!--<script src="scripts/main.js"></script>-->
     <style>
 
@@ -72,12 +73,7 @@
     </nav>
 
     <div id="content">
-        <div>
-            <div class="container" id="datagrid-nodes" >
-                <h1>JBoss Data Grid - Nodes</h1>
 
-            </div>
-        </div>
 
         <div class="container">
             <!-- Example row of columns -->
@@ -90,14 +86,22 @@
                 </div>
                 <div id="highest-ranked-users" class="col-md-4">
                     <h3>Highest reputation</h3>
+                    <svg></svg>
                 </div>
             </div>
 
         </div>
+        <script src="scripts/bootstrap.min.js"></script>
+        <script src="scripts/main.js"></script>
+
+        <div>
+            <div class="container">
+                <h3>Data distribution</h3>
+                <iframe src="http://localhost:8080/jdg-visualizer" width="1200" height="600" sandbox="allow-scripts allow-same-origin"><iframe>
+            </div>
+        </div>
     </div>
 
-    <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/main.js"></script>
 </body>
 
 </html>

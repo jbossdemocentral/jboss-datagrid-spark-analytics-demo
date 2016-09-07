@@ -61,8 +61,8 @@ ISNode.prototype.buildNodeHTML = function(nodeInfo) {
         + 'onmouseout="$(\'#title-' + nodeInfo.id + '\').hide();"'
         */
         + '>'
-        + '<canvas class="nodecanvas" width="150" height="150"/>'
         + '<div class="nodetitle" id="title-' + nodeInfo.id + '">' + nodeInfo.name + ' [<span class="count">0</span>]</div>'
+        + '<canvas class="nodecanvas" width="150" height="150"/>'
         + '</div>';
 }
 

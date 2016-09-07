@@ -193,7 +193,8 @@ echo "  - configuring JBoss EAP"
 echo
 $EAP_HOME/bin/add-user.sh -s -u admin -p admin-123 -s
 $EAP_HOME/bin/add-user.sh -a -u admin -p admin-123 -r ApplicationRealm -s
-$EAP_HOME/bin/jboss-cli.sh --commands="embed-server,/subsystem=ee:write-attribute(name=global-modules,value=[{name=org.jboss.remoting-jmx,slot=main}])"  > /dev/null || { echo >&2 "Faild to add global module to JBoss EAP. Aborting"; exit 7; }
+$EAP_HOME/bin/jboss-cli.sh --file=support/jboss-eap-7-visualizer-config.cli  > /dev/null || { echo >&2 "Faild to configure JBoss EAP 7. Aborting"; exit 7; }
+
 #cp projects/jdg-visualizer/target/jdg-visualizer.war $EAP_HOME/standalone/deployments
 
 
