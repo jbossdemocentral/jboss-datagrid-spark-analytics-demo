@@ -153,6 +153,11 @@ public class Main {
     private static RemoteCacheManager getRemoteCacheManager() throws IOException {
         Properties jdgprops = new Properties();
         jdgprops.load(Main.class.getClassLoader().getResourceAsStream("jdg.properties"));
+        String serverList = System.getProperty("jdg.visualizer.serverList");
+        if(serverList!=null && !serverList.isEmpty()) {
+            jdgprops.setProperty("infinispan.client.hotrod.server_list", serverList);
+        }
+
 
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.withProperties(jdgprops);
