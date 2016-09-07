@@ -223,13 +223,13 @@ popd > /dev/null
 echo "  - building the stackexchange project"
 echo
 pushd projects/stackexchange > /dev/null
-mvn -q clean package || { echo >&2 "Failed to compile the stackexchange project"; exit 3; }
+mvn -q clean install || { echo >&2 "Failed to compile the stackexchange project"; exit 3; }
 popd > /dev/null
 
 echo "  - building the jdg-visualizer project"
 echo
 pushd projects/jdg-visualizer > /dev/null
-mvn -q clean package || { echo >&2 "Failed to compile the jdg-visualizer project"; exit 3; }
+mvn -q clean install || { echo >&2 "Failed to compile the jdg-visualizer project"; exit 3; }
 popd > /dev/null
 
 # echo "  - importing historical Posts, this may take a while"
