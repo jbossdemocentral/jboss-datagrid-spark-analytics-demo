@@ -38,7 +38,7 @@
     </licenses>
 
     <properties>
-        <version.jboss.bom.eap>7.0.1.GA</version.jboss.bom.eap>
+        <version.jboss.bom.eap>7.0.5.GA</version.jboss.bom.eap>
 
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
@@ -48,10 +48,6 @@
 
         <!-- JBoss dependency versions -->
         <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
-
-        <!-- Define the version of the JBoss BOMs we want to import to specify 
-            tested stacks. -->
-        <version.jboss.bom>8.2.1.Final</version.jboss.bom>
 
         <!-- other plugin versions -->
         <version.compiler.plugin>3.1</version.compiler.plugin>

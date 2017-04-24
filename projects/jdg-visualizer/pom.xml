@@ -31,8 +31,8 @@
 	<artifactId>jdg-visualizer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Java EE 6 webapp project</name>
-	<description>A starter Java EE 6 webapp project for use on JBoss AS 7.1 / EAP 6, generated from the jboss-javaee6-webapp archetype</description>
+	<name>JDG Visualizer</name>
+	<description>This is a graphical JBoss Data Grid visualizer based on the 2011 JBoss World Keynote presented by Burr Sutter</description>
 
 
     <properties>
@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want
             to import. -->
-        <jboss.bom.version>7.0.1.GA</jboss.bom.version>
+        <jboss.bom.version>7.0.5.GA</jboss.bom.version>
         <!-- Alternatively, comment out the above line, and un-comment the
             line below to use version 1.0.0.M12-redhat-1 which is a release certified
             to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6
@@ -51,7 +51,7 @@
         <!-- <jboss.bom.version>1.0.0.M12-redhat-1</jboss.bom.version>> -->
 
         <!-- This is the JDG version, please make sure JDG repository is setup (see README.md) -->
-        <infinispan.version>8.3.0.Final-redhat-1</infinispan.version>
+        <infinispan.version>8.4.0.Final-redhat-2</infinispan.version>
         <!-- For community version, remove -redhat-1
         	<infinispan.version>5.1.5.FINAL</infinispan.version>
         -->

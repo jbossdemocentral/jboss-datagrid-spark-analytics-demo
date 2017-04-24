@@ -3,14 +3,14 @@ basedir=`dirname $0`
 
 
 DEMO="JBoss Data Grid and Spark Analytics Demo"
-AUTHORS="Thomas Qvarnstrom, Red Hat"
+AUTHORS="Thomas Qvarnstrom, Cojan van Ballegooijen Red Hat"
 SRC_DIR=$basedir/installs
 
 SPARK_INSTALL=spark-1.6.2-bin-hadoop2.6.tgz
-JDG_INSTALL=jboss-datagrid-7.0.0-server.zip
-ZEPPELIN_INSTALL=zeppelin-0.6.0-bin-all.tgz
+JDG_INSTALL=jboss-datagrid-7.1.0-server.zip
+#ZEPPELIN_INSTALL=zeppelin-0.6.0-bin-all.tgz
 
-SOFTWARE=($SPARK_INSTALL $JDG_INSTALL $ZEPPELIN_INSTALL)
+SOFTWARE=($SPARK_INSTALL $JDG_INSTALL)
 
 
 # wipe screen.
@@ -51,13 +51,13 @@ java -version 2>&1 | grep "java version" | grep 1.8 > /dev/null || { echo >&2 "J
 mvn -v -q >/dev/null 2>&1 || { echo >&2 "Maven is required but not installed yet... aborting."; exit 1; }
 
 # Verify that necesary files are downloaded
-for DONWLOAD in ${SOFTWARE[@]}
+for DOWNLOAD in ${SOFTWARE[@]}
 do
-	if [[ -r $SRC_DIR/$DONWLOAD || -L $SRC_DIR/$DONWLOAD ]]; then
-			echo $DONWLOAD are present...
+	if [[ -r $SRC_DIR/$DOWNLOAD || -L $SRC_DIR/$DOWNLOAD ]]; then
+			echo $DOWNLOAD are present...
 			echo
 	else
-			echo You need to download $DONWLOAD from the Customer Support Portal
+			echo You need to download $DOWNLOAD from the Customer Support Portal
 			echo and place it in the $SRC_DIR directory to proceed...
 			echo
 			exit

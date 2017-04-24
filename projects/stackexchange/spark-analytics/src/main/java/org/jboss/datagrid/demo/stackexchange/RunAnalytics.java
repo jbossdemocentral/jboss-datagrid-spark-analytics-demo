@@ -28,7 +28,7 @@ public class RunAnalytics implements Serializable {
     private static final Pattern SPACE = Pattern.compile(" ");
     private static final Pattern CSV = Pattern.compile(",");
     public static final String DEFAULT_SPARK_MASTER = "spark://localhost:7077";
-    public static final String DEFAULT_HOTROD_SERVER_LIST = "localhost:11222";
+    public static final String DEFAULT_HOTROD_SERVER_LIST = "localhost:11322";
     public static final String SPARK_APP_NAME = "JDG-Spark-App";
 
 
@@ -63,7 +63,6 @@ public class RunAnalytics implements Serializable {
         this.queryUsersWithHighestReputation();
         this.keywordCount();
         this.locationOfPosts();
-
 
     }
 
