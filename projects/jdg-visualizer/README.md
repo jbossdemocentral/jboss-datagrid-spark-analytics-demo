@@ -37,7 +37,7 @@ User configured (see below for instructions).
 This demo application uses a single instance of JBoss Enterprise Application server, and a cluster of JBoss Data Grid servers. The following steps document how to configure the servers whether you plan to build the demo from source or deploy a precompiled demo app.
 
 ### 1.1 System requirements
- * JBoss Data Grid 6.1
+ * JBoss Data Grid 7.1
  * JBoss EAP 6.1
  * Maven 2
 
@@ -171,7 +171,7 @@ Use the hotrod-demo application to load data into the grid: <https://github.com/
 ### 3.1 Configure Maven
 See here to make sure JBoss Repository is configured - <http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#mavenconfiguration/>
 
-In addition, please make sure JDG 6 repository is configured based on JDG 6 Maven Repository installation instructions. If not using JDG 6, please change the `pom.xml` so that the Infinispan dependency is based on community project.
+In addition, please make sure JDG 7 repository is configured based on JDG 7 Maven Repository installation instructions. If not using JDG 7, please change the `pom.xml` so that the Infinispan dependency is based on community project.
 
 NOTE: This code hasn't been tested w/ Infinispan community project.
 
